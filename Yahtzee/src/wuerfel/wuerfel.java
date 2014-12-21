@@ -1,3 +1,4 @@
+package wuerfel;
 
 public class wuerfel {
 int _augen;

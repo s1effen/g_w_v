@@ -1,5 +1,7 @@
+package wuerfel;
 import java.awt.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 public class wuerfelbecher {
@@ -15,6 +17,11 @@ public class wuerfelbecher {
 		}
 	}
 	
+	   public void wirfAlle()
+	    {
+	       wirf(true,true,true,true,true);
+	    }
+	   
 	public void wirf(boolean w1, boolean w2, boolean w3, boolean w4, boolean w5)
 	{
 		_wuerfe++;
@@ -33,6 +40,16 @@ public class wuerfelbecher {
 		}
 	}
 	
+	public String gibInhalt()
+	{  
+	    String ausgabe ="";
+	    for(int i=0; i < 5; i++)
+	    {
+	        ausgabe = ausgabe +  "WÃ¼rfel " + (i+1) + ": " + _wuerfel.get(i)._augen + "\n";
+	    }
+	    return ausgabe;
+	}
+	
 	/**
 	 * Gibt die Summe aller Wuerfel zurueck
 	 * @return
@@ -48,7 +65,7 @@ public class wuerfelbecher {
 	}
 	
 	/**
-	 * Gibt nur 1er oder nur 2er usw. zurück
+	 * Gibt nur 1er oder nur 2er usw. zurueck
 	 * @param augen
 	 * @return
 	 */
@@ -62,18 +79,7 @@ public class wuerfelbecher {
 		return summe;
 	}
 	
-	public boolean kniffel()
-	{
-		int voriger = 0;
-		for(int i=1;i < 5; i++)
-		{
-			if(_wuerfel.get(i)._augen != voriger)return false;
-			voriger = _wuerfel.get(i)._augen;
-		}
-		return true;
-	}
-	
-	private int minimum()
+	public int minimum()
 	{
 		int min = 6;
 		for(wuerfel w : _wuerfel)
@@ -83,7 +89,7 @@ public class wuerfelbecher {
 		return min;
 	}
 	
-	private int maximum()
+	public int maximum()
 	{
 		int max = 1;
 		for(wuerfel w : _wuerfel)
@@ -94,40 +100,15 @@ public class wuerfelbecher {
 	}
 	
 	/**
-	 * Prüft ob ein Würfel mit der angegebenen Augenzahl vorhanden ist
+	 * PrÃ¼ft ob ein WÃ¼rfel mit der angegebenen Augenzahl vorhanden ist
 	 * @param augen
 	 * @return
 	 */
-	private boolean augenzahl_vorhanden(int augen)
+	public boolean augenzahl_vorhanden(int augen)
 	{
 		for(wuerfel w : _wuerfel)
 		{
 			if(w._augen == augen)return true;
-		}
-		return false;
-	}
-	
-	public boolean grStrasse()
-	{
-		return strasse(5);
-	}
-	
-	public boolean klStrasse()
-	{
-		return strasse(4);
-	}
-	
-	private boolean strasse(int laenge)
-	{
-		int min = minimum();
-		if(min <= 3) //Es kann eine Strasse geben...
-		{
-			
-			for(int i=1; i < laenge; i++)
-			{
-				if(!augenzahl_vorhanden(min + i)) return false;//Nachfolger nicht vorhanden
-			}
-			return true;
 		}
 		return false;
 	}
@@ -146,38 +127,5 @@ public class wuerfelbecher {
 		
 	}
 	
-	boolean dreierPasch()
-	{
-		for(int i=1;i<6;i++)
-		{
-			if(anzahl(i) == 3)return true;
-		}
-		return false;
-	}
-	
-	boolean viererPasch()
-	{
-		for(int i=1;i<6;i++)
-		{
-			if(anzahl(i) == 4)return true;
-		}
-		return false;
-	}
-	public boolean fullHouse()
-	{
-		int dreier=0;
-		if(dreierPasch()) //Mindestens ein Dreierpasch
-		{
-			for(int i=1;i<6;i++) //3er ermitteln
-			{
-				if(anzahl(i)==3)dreier=i;
-			}
-			//Prüfen ob es noch einen Zweier != Dreier gibt:
-			for(int i=1;i<6;i++) //noch 2er dabei?
-			{
-				if(anzahl(i)==2 && i!=dreier)return true;
-			}
-		}
-		return false;
-	}
+
 }
