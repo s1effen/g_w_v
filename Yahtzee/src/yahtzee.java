@@ -25,7 +25,7 @@ public class yahtzee
         header();
         System.out.println("1 - Simulation mit Bots");
         System.out.println("2 - Interaktives Spiel");
-        switch(eingabeNum("Bitte option wählen."))
+        switch(eingabeNum("Bitte Option wählen."))
         {
         case 1:
             initBots();
@@ -66,7 +66,7 @@ public class yahtzee
         System.out.println("1 - Punktezettel ansehen");
         System.out.println("2 - Würfeln");
         
-        switch(eingabeNum("Bitte option wählen."))
+        switch(eingabeNum("Bitte Option wählen."))
         {
         case 1:
             aktuellerSpieler.gibTabelle();
@@ -113,7 +113,7 @@ public class yahtzee
             System.out.println("5 - Alle Wuerfel in den Becher");
         }
         
-        switch(eingabeNum("Bitte option wählen."))
+        switch(eingabeNum("Bitte Option wählen."))
         {
         case 1: //Zettel zeigen
             aktuellerSpieler.gibTabelle();
@@ -173,10 +173,14 @@ public class yahtzee
         {
             wuerfelMenu(aktuellerSpieler);
         }
-        else if(!aktuellerSpieler.werte(num))
+        else 
         {
-            System.out.println("Bitte richtige Zahl zum Eintragen eingeben.");
-            wertungMenu(aktuellerSpieler);
+            //Wenn Werten nicht klappt, noch mal probieren. Sonst OK
+            if(!aktuellerSpieler.werte(num))
+            {
+                System.out.println("Bitte richtige Zahl zum Eintragen eingeben.");
+                wertungMenu(aktuellerSpieler);
+            }
         }
     }
     
@@ -193,10 +197,14 @@ public class yahtzee
         {
             wuerfelMenu(aktuellerSpieler);
         }
-        else if(!aktuellerSpieler.streiche(num));
+        else
         {
-            System.out.println("Bitte richtige Zahl zum Streichen eingeben.");
-            streichMenu(aktuellerSpieler);
+           //Wenn Streichen nicht klappt, noch mal probieren. Sonst OK
+            if(!aktuellerSpieler.streiche(num))
+            {
+                System.out.println("Bitte richtige Zahl zum Streichen eingeben.");
+                streichMenu(aktuellerSpieler);
+            }
         }
     }
     

@@ -112,7 +112,7 @@ public class spieler {
     */
    public boolean streiche(int eintrag)
    {
-       return _tabelle.streiche(eintrag);
+        return _tabelle.streiche(eintrag);
    }
    
    /**

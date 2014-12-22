@@ -5,7 +5,7 @@ abstract public class eintrag
     protected String _name;
     protected int _punkte;
     protected boolean _gestrichen = false;
-    protected boolean _gesetzt = false;
+    protected boolean _gesetzt    = false;
     
     public eintrag()
     {
