@@ -9,20 +9,27 @@ import spieler.botSimple;
 import spieler.spieler;
 
 
+/**
+ * Zentrale Exekutive für ein Yahtzee Spiel.
+ * @author Franziska Eger, Frauke Heinecke, Steffen Haesler
+ *
+ */
 public class yahtzee
 {
     static spieler[] _spieler;
     static int aktuellerSpieler;
     static bot[] _bots;
+    
     public static void main(String[] args) throws IOException
     {
+        header();
         System.out.println("1 - Simulation mit Bots");
         System.out.println("2 - Interaktives Spiel");
         switch(eingabeNum("Bitte option wählen."))
         {
         case 1:
             initBots();
-            initGame();
+            initBotGames();
             break;
         case 2:
             initSpieler();
@@ -36,7 +43,11 @@ public class yahtzee
         }
     }
     
-    private static void initGame() throws IOException
+    /**
+     * Legt fest wie viele Spiele die Bots im Simulationsmodus spielen sollen
+     * @throws IOException
+     */
+    private static void initBotGames() throws IOException
     {
         int spiele = eingabeNum("Wie viele Spiele simulieren?.");
         for(bot b : _bots)
@@ -45,6 +56,11 @@ public class yahtzee
         }
     }
 
+    /**
+     * Zentrales Spielermenü
+     * @param aktuellerSpieler Aktueller Spieler
+     * @throws IOException
+     */
     private static void menu(spieler aktuellerSpieler) throws IOException
     {
         System.out.println("1 - Punktezettel ansehen");
@@ -65,12 +81,24 @@ public class yahtzee
 
     }
     
+    /**
+     * Es wird der erste Wurf einer Runde geworfen und danach das Würfelmenü aufgerufen.
+     * @param aktuellerSpieler Aktueller Spieler
+     * @throws IOException
+     */
     private static void wirf(spieler aktuellerSpieler) throws IOException
     {
-        //Wurf 1
         System.out.println(aktuellerSpieler.wirf());
         wuerfelMenu(aktuellerSpieler);
     }
+    
+    /**
+     * Das Würfelmenü. Sind noch Würfe über kann man erneut werfen.
+     * Dazu kann man sich die Punktetabelle ansehen oder Felder Streichen sowie mit
+     * den aktuellen Würfeln werten.
+     * @param aktuellerSpieler Aktueller Spieler
+     * @throws IOException
+     */
     private static void wuerfelMenu(spieler aktuellerSpieler) throws IOException
     {
         System.out.println("-- Bitte Option wählen:");
@@ -131,16 +159,31 @@ public class yahtzee
         }
     }
     
+    /**
+     * Menü um die Wertung einzugeben.
+     * @param aktuellerSpieler Aktueller Spieler
+     * @throws IOException
+     */
     private static void wertungMenu(spieler aktuellerSpieler) throws IOException
     {
         aktuellerSpieler.werte(eingabeNum("-- Bitte Eintrag zum Werten wählen: (Zu wertende sind mit * markiert)"));
     }
     
+    /**
+     * Menü um einen Eintrag zu Streichen
+     * @param aktuellerSpieler Aktueller Spieler
+     * @throws IOException
+     */
     private static void streichMenu(spieler aktuellerSpieler) throws IOException
     {
         aktuellerSpieler.streiche(eingabeNum("-- Bitte Eintrag zum Streichen wählen: (Zu streichende haben noch keine Punkte)"));
     }
     
+    /**
+     * Wirft die angegebenen Würfel aus dem Array wieder in den Becher und würfelt.
+     * @param welcheS Array mit Würfeln als String
+     * @return
+     */
     private static boolean[] wuerfelInBecher(String[] welcheS)
     {
         boolean[] welcheB = {false, false, false, false, false};
@@ -152,6 +195,12 @@ public class yahtzee
         
     }
     
+    /**
+     * Erzeugt eine neue Runde und legt dadurch den nächsten Spieler fest.
+     * Wenn alle Spieler ihre Blöcke voll haben, endet das Spiel.
+     * Wird inklusie Bots gespielt werden hier auch deren Runden ausgeführt.
+     * @throws IOException
+     */
     private static void neueRunde() throws IOException
     {
         if(_spieler.length == aktuellerSpieler -1) //Alle Menschen haben gespielt. Jetzt sind die Bots dran.
@@ -196,6 +245,10 @@ public class yahtzee
 
     }
     
+    /**
+     * Prüft ob alle Spieler fertig sind.
+     * @return true: Alle fertig, false:Nicht alle fertig.
+     */
     private static boolean alleSpielerFertig()
     {
         for(spieler s : _spieler)
@@ -205,6 +258,10 @@ public class yahtzee
         return true;
     }
     
+    /**
+     * Prüft ob alle Bots fertig sind.
+     * @return true: Alle fertig, false:Nicht alle fertig.
+     */
     private static boolean alleBotsFertig()
     {
         for(bot b : _bots)
@@ -214,6 +271,11 @@ public class yahtzee
         return true;
     }
     
+    /**
+     * Menü zum Auswählen der Würfel die zurück in den Becher sollen
+     * @return Array mit den eingegebenen Würfeln als String
+     * @throws IOException
+     */
     private static String[] wuerfelInBecherAuswaehlen() throws IOException
     {
         String[] welcheS = eingabeString("Welche Wuefel? z.B. 1 3 5").split(" ");
@@ -229,6 +291,10 @@ public class yahtzee
         return welcheS;
     }
     
+    /**
+     * Menü zum eingeben der Spieler
+     * @throws IOException
+     */
     private static void initSpieler() throws IOException
     {
         int spieler = eingabeNum("Anzahl Spieler?");
@@ -240,6 +306,10 @@ public class yahtzee
         System.out.println("-- Alle Spieler eingetragen"); 
     }
     
+    /**
+     * Menü zum eingeben der Bots
+     * @throws IOException
+     */
     private static void initBots() throws IOException
     {
         int bots = eingabeNum("Anzahl Bots?");
@@ -252,6 +322,12 @@ public class yahtzee
         
     }
     
+    /**
+     * Menü zum festlegen des Bot Typs.
+     * @param b Nummer des Bots
+     * @return gibt den Bot als Exemplar zurück
+     * @throws IOException
+     */
     private static bot eingabeBotTyp(int b) throws IOException
     {
         switch (eingabeNum("Welcher Typ des Bots: " + b + "?\n1 - Simple\n2 - Mediaum\n3 - Hard"))
@@ -267,6 +343,14 @@ public class yahtzee
             return eingabeBotTyp(b);
         }
     }
+    
+    /**
+     * Fragt den Benutzer nach einem numerischem Wert und prüft dieses.
+     * Falls nicht numerisch, wird der Benutzer erneut aufgefordert.
+     * @param question Frage an den Benutzer
+     * @return Erfragter numerischer Wert
+     * @throws IOException
+     */
     private static int eingabeNum(String question) throws IOException
     {
         System.out.println(question);
@@ -283,6 +367,13 @@ public class yahtzee
         }
     }
     
+    /**
+     * Fragt den Benutzer nach einem alphanumerischen Wert und prüft dieses.
+     * Falls nicht numerisch, wird der Benutzer erneut aufgefordert.
+     * @param question Frage an den Benutzer
+     * @return Erfragter alphanumerischer Wert
+     * @throws IOException
+     */
     private static String eingabeString(String question) throws IOException
     {
         System.out.println(question);
@@ -291,7 +382,10 @@ public class yahtzee
         return eingabe;
     }
     
-    private void header()
+    /**
+     * Erzeugt einen tollen Header!
+     */
+    private static void header()
     {
         System.out.println("        ____             __     __   _     _                ");
         System.out.println("       /\\' .\\    _____   \\ \\   / /  | |   | |               ");
@@ -299,7 +393,6 @@ public class yahtzee
         System.out.println("      \\' / . / /____/..\\   \\   / _` | '_ \\| __|_  / _ \\/ _ \\");
         System.out.println("       \\/___/  \\'  '\\  /    | | (_| | | | | |_ / /  __/  __/");
         System.out.println("                \\'__'\\/     |_|\\__,_|_| |_|\\__/___\\___|\\___|");
-        System.out.println("\n\n Wie viele Spieler?");
     }
 
 }

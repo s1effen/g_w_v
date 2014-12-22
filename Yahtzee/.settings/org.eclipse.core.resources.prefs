@@ -1,5 +1,14 @@
 eclipse.preferences.version=1
+encoding//src/eintraege/einChance.java=UTF-8
 encoding//src/eintraege/einPasch.java=UTF-8
+encoding//src/eintraege/einStrasse.java=UTF-8
+encoding//src/eintraege/eintAugenwerte.java=UTF-8
+encoding//src/eintraege/eintraegeTest.java=UTF-8
+encoding//src/eintraege/tabelle.java=UTF-8
+encoding//src/spieler/bot.java=UTF-8
 encoding//src/spieler/botClass.java=UTF-8
+encoding//src/spieler/spieler.java=UTF-8
+encoding//src/wuerfel/wuerfel.java=UTF-8
 encoding//src/wuerfel/wuerfelbecher.java=UTF-8
+encoding//src/wuerfel/wuerfelbecherTest.java=UTF-8
 encoding//src/yahtzee.java=UTF-8
