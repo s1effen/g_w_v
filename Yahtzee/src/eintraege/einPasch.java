@@ -50,24 +50,29 @@ public class einPasch extends eintrag
     
     @Override public boolean istGueltig(wuerfelbecher becher)
     {
-        int pasch1Auge = 0;
+        int pasch1Auge   = 0;
         int pasch1Anzahl = 0;
         
-        int pasch2Auge = 0;
+        int pasch2Auge   = 0;
         int pasch2Anzahl = 0;
-            for(int i=1; i == 6; i++)
+        
+        for(int i=1; i <= 6; i++)
+        {
+            if(becher.anzahl(i) >= 2)
             {
-                if(becher.anzahl(i) > 2 && pasch1Auge == 0)
+                if(pasch1Auge == 0)
                 {
-                    pasch1Auge = i;
+                    pasch1Auge   = i;
                     pasch1Anzahl = becher.anzahl(i);
                 }
-                else if(becher.anzahl(i) > 2 && pasch2Auge == 0)
+                else
                 {
-                    pasch2Auge = i;
+                    pasch2Auge   = i;
                     pasch2Anzahl = becher.anzahl(i);
                 }
             }
+        }
+            
         //pasch1Anzahl 1 soll immer das groessere sein
         if(pasch1Anzahl < pasch2Anzahl)
         {
@@ -78,12 +83,36 @@ public class einPasch extends eintrag
         
          if(_pasch1Anzahl <= pasch1Anzahl && _pasch2Anzahl <= pasch2Anzahl)
          {
-             return true;
+             return !_gesetzt;
          }
          else
          {
              return false;
-         }
-            
+         } 
+    }
+    
+    @Override public boolean trageEin(wuerfelbecher becher)
+    {
+        if(istGueltig(becher))
+        {
+            if(_pasch1Anzahl == 5 && _pasch2Anzahl == 0)
+            {
+                _punkte = 50;
+            }
+            else if(_pasch1Anzahl < 5 && _pasch2Anzahl == 0)
+            {
+                _punkte = becher.gibSumme();
+            }
+            else if(_pasch1Anzahl + _pasch2Anzahl == 5)
+            {
+                _punkte = 25;
+            }
+            _gesetzt = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

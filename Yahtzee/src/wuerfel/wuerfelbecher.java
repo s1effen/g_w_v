@@ -17,6 +17,14 @@ public class wuerfelbecher {
 		}
 	}
 	
+	   public wuerfelbecher(int[] wuerfel)
+	    {
+	        for(int i=0; i< 5; i++)
+	        {
+	             _wuerfel.add(new wuerfel(wuerfel[i]));
+	        }
+	    }
+	
 	   public void wirfAlle()
 	    {
 	       wirf(true,true,true,true,true);
@@ -24,20 +32,24 @@ public class wuerfelbecher {
 	   
 	public void wirf(boolean w1, boolean w2, boolean w3, boolean w4, boolean w5)
 	{
-		_wuerfe++;
-		if(_wuerfe == 3)
+		if(_wuerfe > 3)
 		{
 			//Man darf nur 3 mal werfen.
-			
 		}
 		else
 		{
+		    _wuerfe++;
 			if(w1)_wuerfel.get(0).wirf();
 			if(w2)_wuerfel.get(1).wirf();
 			if(w3)_wuerfel.get(2).wirf();
 			if(w4)_wuerfel.get(3).wirf();
 			if(w5)_wuerfel.get(4).wirf();
 		}
+	}
+	
+	public int anzahlWuerfe()
+	{
+	    return _wuerfe;
 	}
 	
 	public String gibInhalt()
@@ -116,7 +128,7 @@ public class wuerfelbecher {
 	public int anzahl(int augen)
 	{
 		int count=0;
-		if(_wuerfel.contains(augen))
+		if(_wuerfel.contains(new wuerfel(augen)))
 		{
 			for(wuerfel w : _wuerfel)
 			{
@@ -124,7 +136,6 @@ public class wuerfelbecher {
 			}
 		}
 		return count;
-		
 	}
 	
 

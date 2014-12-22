@@ -2,8 +2,10 @@ package eintraege;
 import wuerfel.*;
 abstract public class eintrag
 {
-    String _name;
-    int _punkte;
+    protected String _name;
+    protected int _punkte;
+    protected boolean _gestrichen = false;
+    protected boolean _gesetzt = false;
     
     public eintrag()
     {
@@ -25,13 +27,42 @@ abstract public class eintrag
         _name = name;
     }
     
-    public int gibPunkte()
+    public Integer gibPunkte()
     {
         return _punkte;
+    }
+    
+    public boolean trageEin(wuerfelbecher becher)
+    {
+        return false;
     }
     
     public boolean istGueltig(wuerfelbecher becher)
     {
         return false;
+    }
+    
+    public boolean gestrichen()
+    {
+        return _gestrichen;
+    }
+    
+    public boolean gesetzt()
+    {
+        return _gesetzt;
+    }
+    
+    public boolean streiche()
+    {
+        if(!gestrichen())
+        {
+            _punkte = 0;
+            _gestrichen = true;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
