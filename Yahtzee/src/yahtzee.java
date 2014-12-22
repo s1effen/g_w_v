@@ -77,6 +77,7 @@ public class yahtzee
             break;
         default:
             System.out.println("Bitte richtige Option auswählen.");
+            menu(aktuellerSpieler);
         }
 
     }
@@ -109,7 +110,7 @@ public class yahtzee
         if(aktuellerSpieler.anzahlWuerfe() < 3)
         {
             System.out.println("4 - Bestimmte Wuerfel in den Becher");
-            System.out.println("5 - Alle Wuefel in den Becher");
+            System.out.println("5 - Alle Wuerfel in den Becher");
         }
         
         switch(eingabeNum("Bitte option wählen."))
@@ -166,7 +167,17 @@ public class yahtzee
      */
     private static void wertungMenu(spieler aktuellerSpieler) throws IOException
     {
-        aktuellerSpieler.werte(eingabeNum("-- Bitte Eintrag zum Werten wählen: (Zu wertende sind mit * markiert)"));
+        int num = eingabeNum("-- Bitte Eintrag zum Werten wählen: (Zu wertende sind mit * markiert) [0 zum Abbrechen]");
+
+        if(num == 0)
+        {
+            wuerfelMenu(aktuellerSpieler);
+        }
+        else if(!aktuellerSpieler.werte(num))
+        {
+            System.out.println("Bitte richtige Zahl zum Eintragen eingeben.");
+            wertungMenu(aktuellerSpieler);
+        }
     }
     
     /**
@@ -176,7 +187,17 @@ public class yahtzee
      */
     private static void streichMenu(spieler aktuellerSpieler) throws IOException
     {
-        aktuellerSpieler.streiche(eingabeNum("-- Bitte Eintrag zum Streichen wählen: (Zu streichende haben noch keine Punkte)"));
+        int num = eingabeNum("-- Bitte Eintrag zum Streichen wählen: (Zu streichende haben noch keine Punkte) [0 zum Abbrechen]");
+
+        if(num == 0)
+        {
+            wuerfelMenu(aktuellerSpieler);
+        }
+        else if(!aktuellerSpieler.streiche(num));
+        {
+            System.out.println("Bitte richtige Zahl zum Streichen eingeben.");
+            streichMenu(aktuellerSpieler);
+        }
     }
     
     /**
@@ -220,7 +241,7 @@ public class yahtzee
         if(alleSpielerFertig() && alleBotsFertig())
         {
             //Zeige Punktübersicht
-            
+            System.out.println("Spiel beendet.");
             for(spieler s : _spieler)
             {
                 System.out.println(s.gibName() + ": " + s.gibPunkte());
@@ -228,6 +249,10 @@ public class yahtzee
             for(bot b : _bots)
             {
                 System.out.println("Bot " + b.gibName() + ": " + b.gibPunkte());
+            }
+            for(spieler s : _spieler)
+            {
+                s.gibTabelle();
             }
         }
         else
@@ -239,7 +264,10 @@ public class yahtzee
             }
             else
             {
-                menu(_spieler[aktuellerSpieler]);
+                //Setze Becher zurück.
+                _spieler[aktuellerSpieler].neuerBecher();
+                System.out.println(_spieler[aktuellerSpieler].wirf());
+                wuerfelMenu(_spieler[aktuellerSpieler]);
             }
         }
 
@@ -278,7 +306,7 @@ public class yahtzee
      */
     private static String[] wuerfelInBecherAuswaehlen() throws IOException
     {
-        String[] welcheS = eingabeString("Welche Wuefel? z.B. 1 3 5").split(" ");
+        String[] welcheS = eingabeString("Welche Wuerfel? z.B. 1 3 5").split(" ");
         for(String s : welcheS)
         {
             if(!s.matches("[1-5]")) //numerisch 1-5

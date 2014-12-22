@@ -99,7 +99,7 @@ public class tabelle
     {
         for(eintrag e : _tabelle)
         {
-            if(!e.gesetzt()) return false;
+            if(!e.gesetzt() && !e._gestrichen) return false;
         }
         return true;
     }

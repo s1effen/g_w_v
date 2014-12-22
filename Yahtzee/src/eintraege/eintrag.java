@@ -56,7 +56,7 @@ abstract public class eintrag
     {
         if(!gestrichen())
         {
-            _punkte = 0;
+            _punkte     = 0;
             _gestrichen = true;
             return true;
         }

@@ -19,6 +19,7 @@ public class wuerfelbecher {
 	 */
 	public wuerfelbecher()
 	{
+	    _wuerfe = 0;
 		for(int i=0; i< 5; i++)
 		{
 			 _wuerfel.add(new wuerfel());

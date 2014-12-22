@@ -114,4 +114,12 @@ public class spieler {
    {
        return _tabelle.streiche(eintrag);
    }
+   
+   /**
+    * Der Spieler bekommt einen neuen Würfelbecher.
+    */
+   public void neuerBecher()
+   {
+       _becher = new wuerfelbecher();
+   }
 }

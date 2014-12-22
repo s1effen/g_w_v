@@ -19,7 +19,7 @@ public class eintraegeTest
         int[] wuerfel1 = {3,3,3,2,2};
         eintrag e1 = new eintAugenwerte(1);
         wuerfelbecher becher1 = new wuerfelbecher(wuerfel1);
-        assertTrue(e1.istGueltig(becher1));
+        assertFalse(e1.istGueltig(becher1));
         
         int[] wuerfel2 = {3,3,1,2,2};
         eintrag e2 = new eintAugenwerte(1);
@@ -29,7 +29,7 @@ public class eintraegeTest
         int[] wuerfel3 = {4,3,3,2,2};
         eintrag e3 = new eintAugenwerte(6);
         wuerfelbecher becher3 = new wuerfelbecher(wuerfel3);
-        assertTrue(e3.istGueltig(becher3));
+        assertFalse(e3.istGueltig(becher3));
         
         int[] wuerfel4 = {6,3,1,2,2};
         eintrag e4 = new eintAugenwerte(6);
@@ -161,5 +161,36 @@ public class eintraegeTest
         wuerfelbecher becher4 = new wuerfelbecher(wuerfel4);
         assertTrue(e4.istGueltig(becher4));
      }
+    
+    @Test
+    public void test_Bonus()
+    {
+        tabelle tab = new tabelle();
+        int[] wuerfel1 = {1,1,1,4,4};
+        wuerfelbecher becher1 = new wuerfelbecher(wuerfel1);
+        tab.werte(1, becher1);
+        
+        int[] wuerfel2 = {2,2,2,4,4};
+        wuerfelbecher becher2 = new wuerfelbecher(wuerfel2);
+        tab.werte(2, becher2);
+        
+        int[] wuerfel3 = {3,3,3,4,4};
+        wuerfelbecher becher3 = new wuerfelbecher(wuerfel3);
+        tab.werte(3, becher3);
+        
+        int[] wuerfel4 = {4,4,4,1,2};
+        wuerfelbecher becher4 = new wuerfelbecher(wuerfel4);
+        tab.werte(4, becher4);
+        
+        int[] wuerfel5 = {5,5,5,1,2};
+        wuerfelbecher becher5 = new wuerfelbecher(wuerfel5);
+        tab.werte(5, becher5);
+        
+        int[] wuerfel6 = {6,6,6,1,2};
+        wuerfelbecher becher6 = new wuerfelbecher(wuerfel6);
+        tab.werte(6, becher6);
+
+        assertTrue(tab.gibBonus() == 35);
+    }
 
 }
