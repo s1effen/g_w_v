@@ -10,7 +10,8 @@ import wuerfel.wuerfelbecher;
 public class tabelle
 {
     //Alle Einträge
-    ArrayList <eintrag> _tabelle = new ArrayList<eintrag>();
+    protected ArrayList <eintrag> _tabelle = new ArrayList<eintrag>();
+    
     //Breite der Tabelle:
     static int _tabBreite = 30;
 

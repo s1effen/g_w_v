@@ -7,8 +7,8 @@ import java.util.Random;
  */
 public class wuerfel {
     
-    int _augen;
-    Random _rand = new Random(); //Randomisierer
+    protected int _augen;
+    protected Random _rand = new Random(); //Randomisierer
     
     /**
      * Erzeugt einen noch nicht geworfenen Würfel.

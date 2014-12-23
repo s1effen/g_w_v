@@ -7,8 +7,8 @@ import wuerfel.wuerfelbecher;
  */
 public class einPasch extends eintrag
 {
-    int _pasch1Anzahl;
-    int _pasch2Anzahl;
+    protected int _pasch1Anzahl;
+    protected int _pasch2Anzahl;
     
     /**
      * Erzeugt ein Feld wo nur ein Pasch bedingung ist.

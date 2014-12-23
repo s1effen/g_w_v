@@ -19,7 +19,7 @@ public interface bot
      * Gibt den Namen zurück
      * @return Name
      */
-    public int gibName();
+    public String gibName();
 
     /**
      * Gibt Auskunft ob der Zettel Voll ist.

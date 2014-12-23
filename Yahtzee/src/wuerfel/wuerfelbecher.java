@@ -12,7 +12,7 @@ public class wuerfelbecher {
     //Alle Würfeld des Bechers als Liste:
 	ArrayList<wuerfel> _wuerfel = new ArrayList<wuerfel>();
 	//Würfe des Bechers
-	int _wuerfe = 0;
+	protected int _wuerfe = 0;
 	
 	/**
 	 * Erzeugt einen neuen Würfelbecher mit Fünf Würfeln.

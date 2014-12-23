@@ -7,7 +7,7 @@ import wuerfel.wuerfelbecher;
  */
 public class einStrasse extends eintrag
 {
-    int _laenge;
+    protected int _laenge;
     
     /**
      * Erzeugt das Feld der Strasse.

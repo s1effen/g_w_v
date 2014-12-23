@@ -8,10 +8,10 @@ import eintraege.tabelle;
  */
 public class spieler {
     
-	String _name;
-	int _gesamtpunkte=0;
-	wuerfelbecher _becher = new wuerfelbecher();
-	tabelle _tabelle = new tabelle();
+    protected String _name;
+	protected int _gesamtpunkte=0;
+	protected wuerfelbecher _becher = new wuerfelbecher();
+	protected tabelle _tabelle = new tabelle();
 	
 	/**
 	 * Erzeugt einen neuen Spieler
