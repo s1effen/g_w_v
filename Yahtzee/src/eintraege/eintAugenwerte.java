@@ -30,13 +30,25 @@ public class eintAugenwerte extends eintrag
     }
     
     /**
+     * Gibt die Punkte zurück die in diesem Eintrag erreicht werden können
+     */
+    @Override public Integer gibPunkte(wuerfelbecher becher)
+    {
+        if(istGueltig(becher))
+        {
+            return becher.gibSumme(_zahl);
+        }
+        return 0;
+    }
+    
+    /**
      * Trägt die Punkte ein, falls erlaubt.
      */
     @Override public boolean trageEin(wuerfelbecher becher)
     {
         if(istGueltig(becher))
         {
-            _punkte = becher.gibSumme(_zahl);
+            _punkte = gibPunkte(becher);
             _gesetzt = true;
             return true;
         }

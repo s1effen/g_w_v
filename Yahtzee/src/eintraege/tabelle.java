@@ -1,5 +1,6 @@
 package eintraege;
 import java.util.ArrayList;
+import java.util.List;
 
 import wuerfel.wuerfelbecher;
 
@@ -36,6 +37,15 @@ public class tabelle
         _tabelle.add(new einChance()); //Chance
         //Gesamtpunkte
 
+    }
+    
+    /**
+     * Gibt eine Kopie der Eintragsliste zurück
+     * @return Eintragsliste
+     */
+    public ArrayList<eintrag> gibEintraege()
+    {
+        return (ArrayList<eintrag>) _tabelle.clone();
     }
     
     /**

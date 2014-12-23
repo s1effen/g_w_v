@@ -24,13 +24,27 @@ public class einChance extends eintrag
     }
     
     /**
+     * Gibt die Punkte zurück die in diesem Eintrag erreicht werden können
+     */
+    @Override public Integer gibPunkte(wuerfelbecher becher)
+    {
+        if(istGueltig(becher))
+        {
+            return becher.gibSumme();
+         }
+
+        return 0;
+    }
+
+    
+    /**
      * Bei der Chance wird immer die Summe des Bechers eingetragen.
      */
     @Override public boolean trageEin(wuerfelbecher becher)
     {
         if(istGueltig(becher))
         {
-            _punkte = becher.gibSumme();
+            _punkte = gibPunkte(becher);
             _gesetzt = true;
             return true;
         }

@@ -121,24 +121,37 @@ public class einPasch extends eintrag
     }
     
     /**
+     * Gibt die Punkte zurück die in diesem Eintrag erreicht werden können
+     */
+    @Override public Integer gibPunkte(wuerfelbecher becher)
+    {
+        if(istGueltig(becher))
+        {
+            if(_pasch1Anzahl == 5 && _pasch2Anzahl == 0)
+            {
+                return 50;
+            }
+            else if(_pasch1Anzahl < 5 && _pasch2Anzahl == 0)
+            {
+                return becher.gibSumme();
+            }
+            else if(_pasch1Anzahl + _pasch2Anzahl == 5)
+            {
+                return 25;
+            }
+        }
+
+        return 0;
+    }
+    
+    /**
      * Trägt die Punkte ein, falls erlaubt.
      */
     @Override public boolean trageEin(wuerfelbecher becher)
     {
         if(istGueltig(becher))
         {
-            if(_pasch1Anzahl == 5 && _pasch2Anzahl == 0)
-            {
-                _punkte = 50;
-            }
-            else if(_pasch1Anzahl < 5 && _pasch2Anzahl == 0)
-            {
-                _punkte = becher.gibSumme();
-            }
-            else if(_pasch1Anzahl + _pasch2Anzahl == 5)
-            {
-                _punkte = 25;
-            }
+            _punkte = gibPunkte(becher);
             _gesetzt = true;
             return true;
         }

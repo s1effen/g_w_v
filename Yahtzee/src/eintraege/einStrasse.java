@@ -56,20 +56,34 @@ public class einStrasse extends eintrag
     }
     
     /**
+     * Gibt die Punkte zurück die in diesem Eintrag erreicht werden können
+     */
+    @Override public Integer gibPunkte(wuerfelbecher becher)
+    {
+        if(istGueltig(becher))
+        {
+            if(_laenge == 4)
+            {
+                return 30;
+            }
+            else if(_laenge == 5)
+            {
+                return 40;
+            }
+        }
+
+
+        return 0;
+    }
+    
+    /**
      * Trägt die Punkte ein, falls erlaubt.
      */
     @Override public boolean trageEin(wuerfelbecher becher)
     {
         if(istGueltig(becher))
         {
-            if(_laenge == 4)
-            {
-                _punkte = 30;
-            }
-            else if(_laenge == 5)
-            {
-                _punkte = 40;
-            }
+            _punkte = gibPunkte(becher);
             _gesetzt = true;
             return true;
         }

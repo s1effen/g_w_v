@@ -52,6 +52,11 @@ abstract public class eintrag
         return _gesetzt;
     }
     
+    public Integer gibPunkte(wuerfelbecher becher)
+    {
+        return 0;
+    }
+    
     public boolean streiche()
     {
         if(!gestrichen())
